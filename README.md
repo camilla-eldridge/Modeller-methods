@@ -133,9 +133,7 @@ For tsp23 we already knew that the only close templates at the time were 5TCX an
           sttsp23.B99990004.pdb          889.46710   -21908.58203        0.04608
           sttsp23.B99990005.pdb          948.67993   -21889.07617        0.09870
 
-        
-             
-        
+       
         
 10. Evaluate the template by viewing the energy profile and looking at the DOPE scores (model and template should align).
 
@@ -308,10 +306,15 @@ From modeller manual:
 
 
 5. Rename best model
-           mv sttsp23.B99990001.pdb STTSP23_mult.pdb       
+
+            mv sttsp23.B99990001.pdb STTSP23_mult.pdb       
+           
 
 6. Evaluate model
-           /usr/bin/python2.7 evaluate_model.py > evaluate_model.log
+
+
+            /usr/bin/python2.7 evaluate_model.py > evaluate_model.log
+
 
 
 7.Take profile from single template (sttsp23.profile and plot with new profile from multiple templates sttsp23_mult.profile)
@@ -376,7 +379,7 @@ From modeller manual:
         
 8. Loop refinement
 
-Attempted loop refinement between 120:190 
+Attempted loop refinement between 120:190 (where the LEL region is and there is a shift in alignment in the DOPE plot)
 
            /usr/bin/python2.7 loop_refine.py > loop_refine.log
 
@@ -412,6 +415,7 @@ Attempted loop refinement between 120:190
 
 
 
+
 9.Model energies
 
         
@@ -433,7 +437,7 @@ Attempted loop refinement between 120:190
 
         
         
-10. Plot all dope scores
+10. Plot all dope scores from single , multi template and refined loop model. 
 
 
 
@@ -470,4 +474,11 @@ Attempted loop refinement between 120:190
         
         
         
-        I interpreted this as the model with loop refinement being no better than the basic template model....
+Conclusion
+
+I interpreted this as the loop refinement showing no serious improvement in the model (loop refinement model also looks weird viewed in pymol). 
+The single template model has the most negative overall DOPE score: model multi(-22093.03906), model single(-22154.52930)so this was chosen as the most likely model for tsp23.
+
+
+
+
