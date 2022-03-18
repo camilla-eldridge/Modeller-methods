@@ -120,6 +120,8 @@ For tsp23 we already knew that the only close templates at the time were 5TCX an
          
 9.Check dope scores for models (lowest == best)
 
+The DOPE score is the discrete optimised protein energy score. The score is an atomic distance-dependant statistical potential which is used to identify the suitability of a structural template for a given amino acid sequence.
+
 
           grep -A 20 ">> Summary"  model-single.log
           
