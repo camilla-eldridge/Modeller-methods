@@ -106,8 +106,8 @@ For tsp23 we already knew that the only close templates at the time were 5TCX an
 
         grep -A 20 ">> Summary"  model-single.log
         
-        >> Summary of successfully produced models:
-        Filename                          molpdf     DOPE score    GA341 score
+        Summary of successfully produced models:
+         Filename                      molpdf     DOPE score    GA341 score
         ----------------------------------------------------------------------
         sttsp23.B99990001.pdb          980.14014   -22154.52930        0.19803
         sttsp23.B99990002.pdb          967.76953   -21628.17188        0.16171
@@ -278,8 +278,8 @@ For tsp23 we already knew that the only close templates at the time were 5TCX an
       grep -A 20 ">> Summary"  model_tsp23.log 
       
 
-      >> Summary of successfully produced models:
-      Filename                                  molpdf          DOPE score       GA341 score
+      Summary of successfully produced models:
+      Filename                      molpdf          DOPE score       GA341 score
       ----------------------------------------------------------------------
       sttsp23.B99990001.pdb         3085.58496   -22093.03906        0.11341
       sttsp23.B99990002.pdb         3216.13330   -21675.56445        0.09355
@@ -297,6 +297,7 @@ From modeller manual:
         
 6. Evaluate model
         /usr/bin/python2.7 evaluate_model.py > evaluate_model.log
+
 
 7.Take profile from single template (sttsp23.profile and plot with new profile from multiple templates sttsp23_mult.profile)
 
@@ -352,10 +353,15 @@ From modeller manual:
         pylab.savefig('dope_profile.png', dpi=65)     
         
         
+      
+  ![image](https://user-images.githubusercontent.com/12966869/159078470-51e2bfe7-f443-4d16-8d95-6349f8b9b574.png)
+      
+          
         
         
 8. Loop refinement
 
+Attempted loop refinement between 120:190 
 
         /usr/bin/python2.7 loop_refine.py > loop_refine.log
 
@@ -412,6 +418,40 @@ From modeller manual:
         
         
         
-  ![image](https://user-images.githubusercontent.com/12966869/159078470-51e2bfe7-f443-4d16-8d95-6349f8b9b574.png)
-      
+10. Plot all dope scores
+
+
+
+    Plotdope_scores.py
+    
+    import modeller
+
+    k = modeller.environ()
+    y = modeller.alignment(k, file='sttsp23-mult.ali')
+
+    model = get_profile('sttsp23_multi_model.profile', y['sttsp23'])  #   multi model 
+    template = get_profile('sttsp23_single_model.profile', y['sttsp23'])    #  single model
+    loop_refined = get_profile('sttsp23_multi_model_loop_refined.profile', y['sttsp23'])
+
+
+    #* Plot the template and model profiles in the same plot for comparison *#
+
+    pylab.figure(1, figsize=(10,6))
+    pylab.xlabel('Alignment position')
+    pylab.ylabel('DOPE per-residue score')
+
+    pylab.plot(model, color='red', linewidth=2, label='Multiple templates:' + '5TCX' + " " +  '2M7Z')
+    pylab.plot(template, color='green', linewidth=2, label='Basic model:' + '5TCX')
+    pylab.plot(loop_refined, color='blue', linewidth=2, label='Loop refinement(DOPE)')
+
+    pylab.legend()
+    pylab.savefig(sttsp23 + 'dope_profile.png', dpi=65)
+       
+     
+        
+        
+       ![image](https://user-images.githubusercontent.com/12966869/159079481-383752ca-c785-4d7b-b460-8390de6586f4.png)
+ 
+        
+        
         
