@@ -21,13 +21,9 @@ Example work through with tsp23 using the example scripts and methods provided  
 
 5. Run compare.py (if you dont know which the closest template is, use this:)
 
-
-      /usr/bin/python2.7 compare.py > compare.log
+    /usr/bin/python2.7 compare.py > compare.log
       
-      
-      Example from modeller documentation:
-      
-      compare.py 
+      compare.py: 
       
       from modeller import *
 
@@ -64,7 +60,8 @@ For tsp23 we already knew that the only close templates at the time were 5TCX an
         /usr/bin/python2.7 align_2D_single.py > align_2D_single.log
       
       
-      
+        align_2D_single.py:
+        
         from modeller import *
 
         env = environ()
@@ -81,23 +78,25 @@ For tsp23 we already knew that the only close templates at the time were 5TCX an
       
 8.Create a model based on the alignment.
 
+
          /usr/bin/python2.7 model-single.py > model-single.log
          
          
-         
-        from modeller import *
-        from modeller.automodel import *
-        #from modeller import soap_protein_od
+         model-single.py:
 
-        env = environ()
-        a = automodel(env, alnfile='sttsp23-5tcx.ali',
-                      knowns='5TCX', sequence='sttsp23',
-                      assess_methods=(assess.DOPE,
-                                      #soap_protein_od.Scorer(),
-                                      assess.GA341))
-        a.starting_model = 1
-        a.ending_model = 5
-        a.make()
+         from modeller import *
+         from modeller.automodel import *
+         #from modeller import soap_protein_od
+
+         env = environ()
+         a = automodel(env, alnfile='sttsp23-5tcx.ali',
+                       knowns='5TCX', sequence='sttsp23',
+                       assess_methods=(assess.DOPE,
+                                       #soap_protein_od.Scorer(),
+                                       assess.GA341))
+         a.starting_model = 1
+         a.ending_model = 5
+         a.make()
 
                
          
@@ -106,7 +105,6 @@ For tsp23 we already knew that the only close templates at the time were 5TCX an
 
 
         grep -A 20 ">> Summary"  model-single.log
-        
         
         >> Summary of successfully produced models:
         Filename                          molpdf     DOPE score    GA341 score
@@ -118,10 +116,7 @@ For tsp23 we already knew that the only close templates at the time were 5TCX an
         sttsp23.B99990005.pdb          948.67993   -21889.07617        0.09870
 
         
-        
-        
-        
-        
+             
         
         
 10. Evaluate the template by viewing the energy profile and looking at the DOPE scores (model and template should align).
@@ -129,6 +124,8 @@ For tsp23 we already knew that the only close templates at the time were 5TCX an
 
         /usr/bin/python2.7 evaluate_template.py > evaluate_template.log
         
+        
+        evaluate_template.py:
         
         from modeller import *
         from modeller.scripts import complete_pdb
@@ -149,8 +146,14 @@ For tsp23 we already knew that the only close templates at the time were 5TCX an
                       normalize_profile=True, smoothing_window=15)
 
         
-       
-        
+   
+   
+   ![image](https://user-images.githubusercontent.com/12966869/159078417-3e78a32f-85bd-4c53-a633-610ed59616ec.png)
+
+   
+   
+   
+ 
         
         
 **For a multiple model template:**
@@ -161,6 +164,7 @@ For tsp23 we already knew that the only close templates at the time were 5TCX an
         /usr/bin/python2.7 salign_tsp.py > salign_tsp.log
         
         
+        salign_tsp.py:
         
         from modeller import *
 
@@ -210,7 +214,7 @@ For tsp23 we already knew that the only close templates at the time were 5TCX an
          /usr/bin/python2.7 align_2dmult.py > multalign_tsp.23.log
          
          
-         
+          align_2dmult.py:
 
           from modeller import *
 
@@ -253,6 +257,7 @@ For tsp23 we already knew that the only close templates at the time were 5TCX an
         /usr/bin/python2.7 model-mult_dope.py > model_tsp23.log
         
         
+        model-mult_dope.py:
         
         from modeller import *
         from modeller.automodel import *
@@ -295,8 +300,11 @@ From modeller manual:
 
 7.Take profile from single template (sttsp23.profile and plot with new profile from multiple templates sttsp23_mult.profile)
 
-        /usr/bin/python2.7 plot_profiles_multi.py        
+
+        /usr/bin/python2.7 plot_profiles_multi.py  
         
+        
+        plot_profiles_multi.py:
         import pylab
         import modeller
 
@@ -348,10 +356,12 @@ From modeller manual:
         
 8. Loop refinement
 
-/usr/bin/python2.7 loop_refine.py > loop_refine.log
+
+        /usr/bin/python2.7 loop_refine.py > loop_refine.log
 
 
-
+        loop_refine.py:
+        
         from modeller import *
         from modeller.automodel import *
 
@@ -402,4 +412,6 @@ From modeller manual:
         
         
         
+  ![image](https://user-images.githubusercontent.com/12966869/159078470-51e2bfe7-f443-4d16-8d95-6349f8b9b574.png)
+      
         
